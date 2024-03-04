@@ -1,4 +1,4 @@
-const {request, response} = require('express');
+/*const {request, response} = require('express');
 
 const tieneRole = (...roles) => {
     return (req = request, res = response, next) => {
@@ -24,4 +24,4 @@ const tieneRole = (...roles) => {
   
 module.exports={
     tieneRole
-}
+}*/

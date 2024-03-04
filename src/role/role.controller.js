@@ -1,4 +1,4 @@
-import { response, request } from "express";
+/*import { response, request } from "express";
 import bcryptjs from 'bcryptjs';
 import Role from './role.model.js';
 
@@ -11,5 +11,5 @@ export const rolePost = async (req, res) => {
     res.status (200).json({
         role
     });
-}
+}*/
 
