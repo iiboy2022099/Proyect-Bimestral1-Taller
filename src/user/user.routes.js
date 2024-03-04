@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { check } from "express-validator";
 import {
-    userPost
+    userPost,
+    getUsers
 } from "./user.controller.js";
 import {
     existeUsuarioById,
@@ -11,6 +12,8 @@ import { validarCampos } from "../middlewares/validar-campos.js";
 
 
 const router = Router();
+
+router.get("/", getUsers);
 
 router.post(
     "/",

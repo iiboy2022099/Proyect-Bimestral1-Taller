@@ -13,3 +13,20 @@ export const userPost = async (req, res) => {
     });
 }
 
+export const getUsers = async (req, res) => {
+    const { limite, desde } = req.query;
+    const query = { state: true };
+
+    const [total, users] = await Promise.all([
+        User.countDocuments(query),
+        User.find(query)
+            .skip(Number(desde))
+            .limit(Number(limite)),
+    ]);
+
+    res.status(200).json({
+        total,
+        users,
+    });
+}
+
