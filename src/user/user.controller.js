@@ -30,3 +30,35 @@ export const getUsers = async (req, res) => {
     });
 }
 
+export const putUser = async (req, res = response) => {
+    const {id} = req.params;
+    const {_id, password, correo, ...rest} = req.body;
+
+    if(password){
+        const salt = bcryptjs.genSaltSync();
+        rest.password = bcryptjs.hashSync(password, salt);
+
+    }
+
+    await User.findByIdAndUpdate(id, rest);
+
+    const user = await User.findOne({_id: id});
+
+    res.status(200).json({
+        msg: 'Updated User',
+        user,
+    });
+}
+
+export const deleteUser = async (req, res) => {
+    const {id} = req.params;
+    await User.findByIdAndUpdate(id,{state: false});
+
+    const user = await User.findOne({_id: id});
+
+    res.status(200).json({
+        msg: 'Usuario eliminado exitosamente',
+        user
+    });
+}
+

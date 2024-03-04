@@ -2,7 +2,9 @@ import { Router } from "express";
 import { check } from "express-validator";
 import {
     userPost,
-    getUsers
+    getUsers,
+    putUser,
+    deleteUser
 } from "./user.controller.js";
 import {
     existeUsuarioById,
@@ -28,5 +30,25 @@ router.post(
     ],
     userPost 
 );
+
+router.put(
+    "/:id",
+    [
+        check("id", "This is not a valid ID").isMongoId(),
+        check("id").custom(existeUsuarioById),
+        validarCampos,
+    ],
+    putUser
+
+);
+
+router.delete(
+    "/:id",
+    [
+        check("id","El id no es un formato válido de MongoDB").isMongoId(),
+        check("id").custom(existeUsuarioById),
+        validarCampos
+    ], deleteUser);
+
 
 export default router;
